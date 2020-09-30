@@ -71,6 +71,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   },
                   child: Text(
                     'Get Weather',
+                    style: kReqularTextStyle,
                   ),
                 ),
               ],
