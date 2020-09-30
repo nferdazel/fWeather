@@ -1,4 +1,4 @@
-package com.example.fWeather
+package org.marsolabs.fweather
 
 import io.flutter.embedding.android.FlutterActivity
 

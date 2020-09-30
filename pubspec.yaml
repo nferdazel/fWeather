@@ -21,7 +21,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  change_app_package_name: ^0.1.2
 flutter:
   uses-material-design: true
 

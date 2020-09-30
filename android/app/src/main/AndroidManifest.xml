@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.marsolabs.fWeather">
+    package="com.marsolabs.fWeather">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
