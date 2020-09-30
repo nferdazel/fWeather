@@ -1,3 +1,4 @@
+import 'package:fWeather/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:fWeather/components/card.dart';
 
@@ -11,6 +12,37 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel weather = WeatherModel();
+
+  int temperature;
+  String weatherIcon;
+  String cityName;
+  String weatherMsg;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void updateUi(dynamic weatherData) {
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        weatherMsg = 'Unable to fetch data';
+        cityName = '';
+        return;
+      }
+
+      cityName = weatherData['name'];
+      double temp = weatherData['main']['temp'].toDouble();
+      temperature = temp.toInt();
+      var condition = weatherData['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      weatherMsg = weather.getMessage(temperature);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,16 +56,28 @@ class _LocationScreenState extends State<LocationScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: RCard(),
+                  child: RCard(
+                    cardChild: Text(
+                      '$temperature°',
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: RCard(),
+                  child: RCard(
+                    cardChild: Text(
+                      '$weatherIcon',
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: RCard(),
+            child: RCard(
+              cardChild: Text(
+                '$weatherMsg in $cityName',
+              ),
+            ),
           ),
         ],
       ),
