@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fWeather/constants.dart';
 import 'package:fWeather/components/card.dart';
 import 'package:fWeather/services/weather.dart';
 import 'package:fWeather/screens/cityScreen.dart';
@@ -100,6 +101,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     child: RCard(
                       cardChild: Text(
                         '$temperature°',
+                        style: kNumberTextStyle,
                       ),
                     ),
                   ),
@@ -107,6 +109,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     child: RCard(
                       cardChild: Text(
                         '$weatherIcon',
+                        style: TextStyle(fontSize: 100.0),
                       ),
                     ),
                   ),
@@ -118,6 +121,7 @@ class _LocationScreenState extends State<LocationScreen> {
               child: RCard(
                 cardChild: Text(
                   '$weatherMsg in $cityName',
+                  style: kResultTextStyle,
                 ),
               ),
             ),
