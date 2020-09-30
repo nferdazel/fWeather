@@ -1,6 +1,7 @@
-import 'package:fWeather/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:fWeather/components/card.dart';
+import 'package:fWeather/services/weather.dart';
+import 'package:fWeather/screens/cityScreen.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
@@ -46,41 +47,73 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('fWeather'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: RCard(
-                    cardChild: Text(
-                      '$temperature°',
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  FlatButton(
+                    onPressed: () async {
+                      var weatherData = await weather.getLocationWeather();
+                      updateUi(weatherData);
+                    },
+                    child: Icon(
+                      Icons.near_me,
+                      size: 30.0,
                     ),
                   ),
-                ),
-                Expanded(
-                  child: RCard(
-                    cardChild: Text(
-                      '$weatherIcon',
-                    ),
+                  FlatButton(
+                    onPressed: () async {
+                      var typedName = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return CityScreen();
+                          },
+                        ),
+                      );
+                    },
                   ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: RCard(
-              cardChild: Text(
-                '$weatherMsg in $cityName',
+                ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: RCard(
+                      cardChild: Text(
+                        '$temperature°',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: RCard(
+                      cardChild: Text(
+                        '$weatherIcon',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: RCard(
+                cardChild: Text(
+                  '$weatherMsg in $cityName',
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

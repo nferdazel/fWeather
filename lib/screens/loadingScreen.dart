@@ -36,7 +36,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: SpinKitThreeBounce(
           color: Colors.white,
-          size: 100.0,
+          size: 50.0,
         ),
       ),
     );
