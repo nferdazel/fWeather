@@ -5,11 +5,10 @@ const kActiveCardColour = Color(0xFF1D1E33);
 const kBottomContainerColour = Color(0xFFEB1555);
 
 const kNumberTextStyle = TextStyle(
-  fontSize: 100.0,
+  fontSize: 90.0,
   fontWeight: FontWeight.w900,
 );
 
 const kResultTextStyle = TextStyle(
-  fontSize: 50.0,
-  fontWeight: FontWeight.bold,
+  fontSize: 40.0,
 );

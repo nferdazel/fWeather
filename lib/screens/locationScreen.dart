@@ -51,65 +51,61 @@ class _LocationScreenState extends State<LocationScreen> {
     return SafeArea(
       child: Scaffold(
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: TextField(
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                    onChanged: (value) {
+                      cityName = value;
+                    },
+                  ),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context, cityName);
+                  },
+                  child: Text(
+                    'Get Weather',
+                  ),
+                ),
+              ],
+            ),
             Expanded(
               flex: 1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FlatButton(
-                    onPressed: () async {
-                      var weatherData = await weather.getLocationWeather();
-                      updateUi(weatherData);
-                    },
-                    child: Icon(
-                      Icons.near_me,
-                      size: 30.0,
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () async {
-                      var typedName = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return CityScreen();
-                          },
-                        ),
-                      );
-                      if (typedName != null) {
-                        var weatherData =
-                            await weather.getCityWeather(typedName);
-                        updateUi(weatherData);
-                      }
-                    },
-                    child: Icon(
-                      Icons.location_city,
-                      size: 30.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: RCard(
-                      cardChild: Text(
-                        '$temperature°',
-                        style: kNumberTextStyle,
+                      colour: kActiveCardColour,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '$temperature°',
+                            style: kNumberTextStyle,
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Expanded(
                     child: RCard(
-                      cardChild: Text(
-                        '$weatherIcon',
-                        style: TextStyle(fontSize: 100.0),
+                      colour: kActiveCardColour,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '$weatherIcon',
+                            style: kNumberTextStyle,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -117,11 +113,18 @@ class _LocationScreenState extends State<LocationScreen> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: RCard(
-                cardChild: Text(
-                  '$weatherMsg in $cityName',
-                  style: kResultTextStyle,
+                colour: kActiveCardColour,
+                cardChild: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      '$weatherMsg in $cityName',
+                      textAlign: TextAlign.center,
+                      style: kResultTextStyle,
+                    ),
+                  ],
                 ),
               ),
             ),
