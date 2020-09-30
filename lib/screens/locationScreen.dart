@@ -59,6 +59,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   child: TextField(
                     style: TextStyle(
                       color: Colors.black,
+                      fontSize: 20.0,
                     ),
                     onChanged: (value) {
                       cityName = value;
@@ -66,8 +67,11 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context, cityName);
+                  onPressed: () async {
+                    if (cityName != null) {
+                      var weatherData = await weather.getCityWeather(cityName);
+                      updateUi(weatherData);
+                    }
                   },
                   child: Text(
                     'Get Weather',
