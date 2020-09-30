@@ -1,3 +1,5 @@
+import 'package:fWeather/screens/locationScreen.dart';
+import 'package:fWeather/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -12,8 +14,30 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
   }
 
+  void getLocation() async {
+    var weatherData = await WeatherModel().getLocationWeather();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return LocationScreen(
+            locationWeather: weatherData,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: SpinKitThreeBounce(
+          color: Colors.white,
+          size: 100.0,
+        ),
+      ),
+    );
   }
 }
