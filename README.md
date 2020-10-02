@@ -3,7 +3,10 @@ Implementation of BMI Calculator design and Clima functionality from The App Bre
 
 ## Task List
 - [x] setup the project
-- [ ] adding placeholder to the search city column
+- [ ] add placeholder to the search city column
+- [ ] add tabs for current location weather and searchable city
+- [ ] add color theme changer for light and dark theme
+- [x] KISS
 
 ## Screenshot
 
