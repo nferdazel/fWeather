@@ -221,7 +221,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 //margin: EdgeInsets.only(bottom: 50),
                 child: TyperAnimatedTextKit(
                     text: [
-                      "Created by Zafer",
+                      "Created with Love",
                     ],
                     textStyle: TextStyle(
                       color: Colors.redAccent,

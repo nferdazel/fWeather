@@ -56,7 +56,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           SizedBox(height: 30,),
           Container(
             child: Text(
-              "WeatherX ️ ",
+              "fWeather️ ",
               style: TextStyle(
                 fontSize: 55,
                 color: Colors.redAccent,
