@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fWeather/constants.dart';
-import 'package:fWeather/components/card.dart';
 import 'package:fWeather/services/weather.dart';
+import 'city_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class LocationScreen extends StatefulWidget {
-  LocationScreen({this.locationWeather});
-
-  final locationWeather;
-
+  LocationScreen({this.locationweather});
+  final locationweather;
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -15,126 +15,228 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
 
-  int temperature;
-  String weatherIcon;
-  String cityName;
-  String weatherMsg;
+  int temp;
+  Icon weathericon;
+  String displayText;
+  int temp_min;
+  int temp_max;
+//  double temp_mn;
+//  double temp_mx;
+  String subtxt;
 
+  String cityname;
   @override
   void initState() {
+
     super.initState();
-    updateUi(widget.locationWeather);
+    updateUI(widget.locationweather);
   }
 
-  void updateUi(dynamic weatherData) {
+  void updateUI(dynamic weatherData) {
     setState(() {
       if (weatherData == null) {
-        temperature = 0;
-        weatherIcon = 'Error';
-        weatherMsg = 'Unable to fetch data';
-        cityName = '';
+        temp = 0;
+        weathericon = Icon(Icons.error_outline);
+        cityname = 'the app';
         return;
       }
+       temp = weatherData['main']['temp'].toInt();
 
-      cityName = weatherData['name'];
-      double temp = weatherData['main']['temp'].toDouble();
-      temperature = temp.toInt();
+      temp_min = (weatherData['main']['temp_min']).toInt();
+      temp_max =(weatherData['main']['temp_max']).toInt();
+
+      displayText = weather.getMessage(temp);
+
       var condition = weatherData['weather'][0]['id'];
-      weatherIcon = weather.getWeatherIcon(condition);
-      weatherMsg = weather.getMessage(temperature);
+      weathericon = weather.getWeatherIcon(condition);
+      subtxt = weather.subtext(condition);
+      cityname = weatherData['name'];
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(15.0),
-                  child: TextField(
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20.0,
-                    ),
-                    onChanged: (value) {
-                      cityName = value;
-                    },
-                  ),
-                ),
-                FlatButton(
-                  onPressed: () async {
-                    if (cityName != null) {
-                      var weatherData = await weather.getCityWeather(cityName);
-                      updateUi(weatherData);
-                    }
-                  },
-                  child: Text(
-                    'Get Weather',
-                    style: kReqularTextStyle,
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: RCard(
-                      colour: kActiveCardColour,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '$temperature°',
-                            style: kNumberTextStyle,
-                          ),
-                        ],
+    return Scaffold(
+//      backgroundColor: Colors.white,
+      body: Container(
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+
+
+
+
+                    FlatButton(
+                      onPressed: () async {
+                        var weatherData = await weather.locationWeather();
+                        updateUI(weatherData);
+                      },
+                      child: Icon(
+
+                        Icons.gps_fixed,
+                        size: 30,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: RCard(
-                      colour: kActiveCardColour,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '$weatherIcon',
-                            style: kNumberTextStyle,
+                    FlatButton(
+                      onPressed: () async {
+                        var typedname = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return CityScreen();
+                            },
                           ),
-                        ],
+                        );
+                        if (typedname != null) {
+                          var weatherdata =
+                          await weather.cityWeather(typedname);
+                          updateUI(weatherdata);
+                        }
+                      },
+                      child: Icon(
+                        FontAwesomeIcons.city,
+                        size: 28.0,
+                        color: Colors.redAccent,
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: RCard(
-                colour: kActiveCardColour,
-                cardChild: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      '$weatherMsg in $cityName',
-                      textAlign: TextAlign.center,
-                      style: kResultTextStyle,
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              Padding(
+                  padding: EdgeInsets.fromLTRB(50, 50, 50, 0),
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        child: Text(
+                          cityname,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 35,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+
+              Expanded(
+                flex: 9,
+                child: Container(
+
+
+
+                  margin: EdgeInsets.fromLTRB(50, 30, 50, 80),
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+
+                    children: <Widget>[
+                      SizedBox(height: 10,),
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
+                            '$temp°',
+                            style: TextStyle(
+                                fontSize: 75,
+                                fontWeight: FontWeight.bold,
+
+                                ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
+                            subtxt,
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 10, 50),
+                        child: Container(
+                          child: Text(
+                            "$displayText in $cityname",
+                            style: TextStyle(
+                                fontSize: 21,
+                                color: Colors.grey[500],
+                                ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          child: Divider(
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 0, 38),
+                                //padding: const EdgeInsets.all(8.0),
+                                child: weathericon,
+                              )),
+                          SizedBox(width: 100,),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(20, 0, 0, 38),
+                              child: Text(
+                                '$temp_min°-$temp_max°',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.grey[500],
+                                ),
+                              ),
+                            ),
+                          ),
+
+
+                        ],
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color:  Color(0xFF0C0C0C),
+                  ),
+
+                ),
+
+              ),
+              Expanded(
+                flex: 1,
+                //margin: EdgeInsets.only(bottom: 50),
+                child: TyperAnimatedTextKit(
+                    text: [
+                      "Created by Zafer",
+                    ],
+                    textStyle: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 25.0,
+                    ),
+                    textAlign: TextAlign.start,
+                    alignment:
+                    AlignmentDirectional.topStart // or Alignment.topLeft
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
