@@ -72,8 +72,9 @@ class WeatherModel {
         WeatherIcons.cloud,
         color: Colors.blue,
       );
-    } else
+    } else {
       return null;
+    }
   }
 
   String subText(int condition) {
