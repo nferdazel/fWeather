@@ -35,6 +35,7 @@ class _LocationScreenState extends State<LocationScreen> {
         cityName = 'the app';
         return;
       }
+
       temp = weatherData['main']['temp'].toInt();
 
       minTemp = (weatherData['main']['temp_min']);
@@ -97,7 +98,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.fromLTRB(50, 50, 50, 0),
+                  padding: EdgeInsets.fromLTRB(50, 20, 50, 0),
                   child: Row(
                     children: <Widget>[
                       SizedBox(
