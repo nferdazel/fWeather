@@ -38,8 +38,8 @@ class _LocationScreenState extends State<LocationScreen> {
       }
       temp = weatherData['main']['temp'].toInt();
 
-      minTemp = (weatherData['main']['minTemp']).toInt();
-      maxTemp = (weatherData['main']['maxTemp']).toInt();
+      minTemp = (weatherData['main']['minTemp']);
+      maxTemp = (weatherData['main']['maxTemp']);
 
       displayText = weather.getMessage(temp);
 
@@ -53,7 +53,6 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      backgroundColor: Colors.white,
       body: Container(
         child: SafeArea(
           child: Column(
@@ -70,12 +69,12 @@ class _LocationScreenState extends State<LocationScreen> {
                       child: Icon(
                         Icons.gps_fixed,
                         size: 30,
-                        color: Colors.white,
+                        color: Colors.blueAccent,
                       ),
                     ),
                     FlatButton(
                       onPressed: () async {
-                        var typedname = await Navigator.push(
+                        var typedName = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
@@ -83,16 +82,16 @@ class _LocationScreenState extends State<LocationScreen> {
                             },
                           ),
                         );
-                        if (typedname != null) {
-                          var weatherdata =
-                              await weather.cityWeather(typedname);
-                          updateUI(weatherdata);
+                        if (typedName != null) {
+                          var weatherData =
+                              await weather.cityWeather(typedName);
+                          updateUI(weatherData);
                         }
                       },
                       child: Icon(
                         FontAwesomeIcons.city,
                         size: 28.0,
-                        color: Colors.redAccent,
+                        color: Colors.blueAccent,
                       ),
                     ),
                   ],
@@ -163,7 +162,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       Expanded(
                         child: SizedBox(
                           child: Divider(
-                            color: Colors.redAccent,
+                            color: Colors.blueAccent,
                           ),
                         ),
                       ),
@@ -199,22 +198,6 @@ class _LocationScreenState extends State<LocationScreen> {
                     color: Color(0xFF0C0C0C),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                //margin: EdgeInsets.only(bottom: 50),
-                child: TyperAnimatedTextKit(
-                    text: [
-                      "Created with Love",
-                    ],
-                    textStyle: TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 25.0,
-                    ),
-                    textAlign: TextAlign.start,
-                    alignment:
-                        AlignmentDirectional.topStart // or Alignment.topLeft
-                    ),
               ),
             ],
           ),
