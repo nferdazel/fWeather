@@ -5,8 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class LocationScreen extends StatefulWidget {
-  LocationScreen({this.locationweather});
-  final locationweather;
+  LocationScreen({this.locationWeather});
+  final locationWeather;
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -25,7 +25,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     super.initState();
-    updateUI(widget.locationweather);
+    updateUI(widget.locationWeather);
   }
 
   void updateUI(dynamic weatherData) {

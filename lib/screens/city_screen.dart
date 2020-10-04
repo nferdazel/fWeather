@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fWeather/utilities/constants.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class CityScreen extends StatefulWidget {
   @override
@@ -8,7 +7,7 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
- String Cityname;
+  String cityName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +26,12 @@ class _CityScreenState extends State<CityScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: FlatButton(
-                  onPressed: () {Navigator.pop(context);},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Icon(
                     Icons.arrow_back_ios,
-                    color:Colors.white,
+                    color: Colors.white,
                     size: 50.0,
                   ),
                 ),
@@ -39,15 +40,22 @@ class _CityScreenState extends State<CityScreen> {
                 padding: EdgeInsets.all(20.0),
                 child: TextField(
                   style: TextStyle(color: Colors.black),
-                  onChanged: (value){
-                    Cityname=value;
+                  onChanged: (value) {
+                    cityName = value;
                   },
                   decoration: kTextfiedstyle,
                 ),
               ),
               FlatButton(
-                onPressed: () {Navigator.pop(context,Cityname);},
-                child: Center(child: Text('Get Weather',style: TextStyle(fontSize: 45,fontWeight: FontWeight.w900),))
+                onPressed: () {
+                  Navigator.pop(context, cityName);
+                },
+                child: Center(
+                  child: Text(
+                    'Get Weather',
+                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.w900),
+                  ),
+                ),
               ),
             ],
           ),
@@ -56,8 +64,3 @@ class _CityScreenState extends State<CityScreen> {
     );
   }
 }
-
-//Text(
-//'Get Weather',
-//style: kButtonTextStyle,
-//),

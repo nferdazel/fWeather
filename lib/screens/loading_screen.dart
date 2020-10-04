@@ -24,7 +24,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       MaterialPageRoute(
         builder: (context) {
           return LocationScreen(
-            locationweather: weatherData,
+            locationWeather: weatherData,
           );
         },
       ),
@@ -36,23 +36,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        children: [
           Center(
-            child: SpinKitCubeGrid(
-              color: Colors.redAccent,
-              size: 100.0,
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            child: Text(
-              "fWeather️ ",
-              style: TextStyle(
-                fontSize: 55,
-                color: Colors.redAccent,
-              ),
+            child: SpinKitThreeBounce(
+              color: Colors.blueAccent,
+              size: 50.0,
             ),
           ),
         ],
