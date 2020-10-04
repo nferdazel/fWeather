@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:fWeather/screens/loadingScreen.dart';
+import 'package:fWeather/screens/LoadScreen.dart';
 
-void main() => runApp(FWeather());
 
-class FWeather extends StatelessWidget {
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      theme: ThemeData.light(),
-      home: LoadingScreen(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home:LoadingScreen(),
     );
   }
 }
