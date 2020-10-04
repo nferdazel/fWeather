@@ -28,7 +28,7 @@ class WeatherModel {
     if (temp > 33) {
       return 'It\'s 🍦 time';
     } else if (temp > 28) {
-      return 'Time for shorts,shades and 👕';
+      return 'Time for shorts, shades,  and 👕';
     } else if (temp < 17) {
       return 'You\'ll need 🧣 and 🧤';
     } else {

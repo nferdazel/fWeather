@@ -38,8 +38,8 @@ class _LocationScreenState extends State<LocationScreen> {
 
       temp = weatherData['main']['temp'].toInt();
 
-      minTemp = (weatherData['main']['temp_min']);
-      maxTemp = (weatherData['main']['temp_max']);
+      minTemp = (weatherData['main']['temp_min']).toInt();
+      maxTemp = (weatherData['main']['temp_max']).toInt();
 
       displayText = weather.getMessage(temp);
 
@@ -56,11 +56,11 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         child: SafeArea(
           child: Column(
-            children: <Widget>[
+            children: [
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
+                  children: [
                     FlatButton(
                       onPressed: () async {
                         var weatherData = await weather.locationWeather();
@@ -100,7 +100,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                   padding: EdgeInsets.fromLTRB(50, 20, 50, 0),
                   child: Row(
-                    children: <Widget>[
+                    children: [
                       SizedBox(
                         child: Text(
                           cityName,
@@ -118,7 +118,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   margin: EdgeInsets.fromLTRB(50, 30, 50, 80),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
+                    children: [
                       SizedBox(
                         height: 10,
                       ),
@@ -167,7 +167,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         ),
                       ),
                       Row(
-                        children: <Widget>[
+                        children: [
                           Expanded(
                               child: Padding(
                             padding: EdgeInsets.fromLTRB(0, 0, 0, 38),
@@ -179,9 +179,9 @@ class _LocationScreenState extends State<LocationScreen> {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 0, 38),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 30),
                               child: Text(
-                                '$minTemp° $maxTemp°',
+                                '$minTemp° to $maxTemp°',
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey[500],
