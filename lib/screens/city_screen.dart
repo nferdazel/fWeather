@@ -11,7 +11,6 @@ class _CityScreenState extends State<CityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      backgroundColor: Colors.redAccent,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
