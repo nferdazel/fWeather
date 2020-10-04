@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fWeather/services/weather.dart';
 import 'package:fWeather/screens/city_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
@@ -38,8 +37,8 @@ class _LocationScreenState extends State<LocationScreen> {
       }
       temp = weatherData['main']['temp'].toInt();
 
-      minTemp = (weatherData['main']['minTemp']);
-      maxTemp = (weatherData['main']['maxTemp']);
+      minTemp = (weatherData['main']['temp_min']);
+      maxTemp = (weatherData['main']['temp_max']);
 
       displayText = weather.getMessage(temp);
 
@@ -181,7 +180,7 @@ class _LocationScreenState extends State<LocationScreen> {
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(20, 0, 0, 38),
                               child: Text(
-                                '$minTemp°-$maxTemp°',
+                                '$minTemp° $maxTemp°',
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey[500],
