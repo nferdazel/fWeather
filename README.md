@@ -9,8 +9,10 @@ Implementation of BMI Calculator design and Clima functionality from The App Bre
 - [x] KISS
 - [ ] added soon
 
-## Screenshot
+## Note
+If you have any idea about what to do, please create new branch upon this repository.
 
-![fWeather screenshot](https://github.com/nferdazel/fWeather/blob/master/fWeather_scrot.jpeg)
+## Screenshot
+Currently not available.
 
 
