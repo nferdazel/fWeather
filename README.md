@@ -13,9 +13,6 @@ Implementation of BMI Calculator design and Clima functionality from The App Bre
 - experimental-features
 - fooling-around
 
-## Note
-If you have any idea, please apply patches to the provided branches.
-
 ## Screenshot
 Currently not available.
 
